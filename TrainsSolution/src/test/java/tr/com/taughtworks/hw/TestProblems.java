@@ -1,6 +1,8 @@
 package tr.com.taughtworks.hw;
 
 import org.junit.BeforeClass;
+import org.junit.Test;
+import tr.com.taughtworks.hw.algorithm.DijkstraAlgorithm;
 import tr.com.taughtworks.hw.model.Edge;
 import tr.com.taughtworks.hw.model.Graph;
 import tr.com.taughtworks.hw.model.Vertex;
@@ -18,6 +20,14 @@ public class TestProblems {
      */
     public static Graph graph;
 
+    /**
+     * Dijkstra algorithm to traverse the graph
+     */
+    public static DijkstraAlgorithm dijkstra;
+
+    /**
+     * Initializes sample graph before tests to run.
+     */
     @BeforeClass
     public static void initTestEnvironment(){
 
@@ -70,7 +80,88 @@ public class TestProblems {
          * Init graph.
          */
         graph = new Graph(vertexList,edgeList);
+        dijkstra = new DijkstraAlgorithm(graph);
+        dijkstra.execute(vertexList.get(0));
     }
 
+    /**
+     * Tests the distance of the route A-B-C
+     */
+    @Test
+    public void testCaseOne(){
+
+    }
+
+    /**
+     * Tests the distance of the route A-D.
+     */
+    @Test
+    public void testCaseTwo(){
+
+    }
+
+    /**
+     * Tests the distance of the route A-D-C.
+     */
+    @Test
+    public void testCaseThree(){
+
+    }
+
+    /**
+     * Tests the distance of the route A-E-B-C-D.
+     */
+    @Test
+    public void testCaseFour(){
+
+    }
+
+    /**
+     * Tests the distance of the route A-E-D.
+     */
+    @Test
+    public void testCaseFive(){
+
+    }
+
+    /**
+     * Tests the number of trips starting at C and ending at C with a maximum of 3 stops.
+     */
+    @Test
+    public void testCaseSix(){
+
+    }
+
+    /**
+     * Tests the number of trips starting at A and ending at C with exactly 4 stops.
+     */
+    @Test
+    public void testCaseSeven(){
+
+    }
+
+    /**
+     * Tests the length of the shortest route from A to C.
+     */
+    @Test
+    public void testCaseEight(){
+
+    }
+
+    /**
+     * Tests the length of the shortest route from B to B.
+     */
+    @Test
+    public void testCaseNine(){
+
+    }
+
+    /**
+     * Tests the number of different routes from C to C with a distance of less than 30.
+     */
+    @Test
+    public void testCaseTen(){
+
+    }
 
 }

@@ -4,7 +4,13 @@ package tr.com.taughtworks.hw.model;
  * Created by Mert on 18.3.2015.
  */
 public class Vertex {
+    /**
+     * Vertex identifier.
+     */
     final private String id;
+    /**
+     * Name of the vertex.
+     */
     final private String name;
 
 
@@ -12,6 +18,7 @@ public class Vertex {
         this.id = id;
         this.name = name;
     }
+
     public String getId() {
         return id;
     }

@@ -7,6 +7,8 @@ import tr.com.taughtworks.hw.model.Vertex;
 import java.util.*;
 
 /**
+ * Java implementation of Dijkstra Algorithm.
+ *
  * Created by Mert on 18.3.2015.
  */
 public class DijkstraAlgorithm {
@@ -24,6 +26,7 @@ public class DijkstraAlgorithm {
         this.edges = new ArrayList<Edge>(graph.getEdges());
     }
 
+
     public void execute(Vertex source) {
         settledNodes = new HashSet<Vertex>();
         unSettledNodes = new HashSet<Vertex>();
@@ -39,6 +42,10 @@ public class DijkstraAlgorithm {
         }
     }
 
+    /**
+     *
+     * @param node
+     */
     private void findMinimalDistances(Vertex node) {
         List<Vertex> adjacentNodes = getNeighbors(node);
         for (Vertex target : adjacentNodes) {
@@ -53,16 +60,23 @@ public class DijkstraAlgorithm {
 
     }
 
-    private int getDistance(Vertex node, Vertex target) {
+    /**
+     * Returns cost between two vertices.
+     */
+    public int getDistance(Vertex node, Vertex target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target)) {
                 return edge.getWeight();
             }
         }
-        throw new RuntimeException("Should not happen");
+        // returns -1 if no edge in between.
+        return -1;
     }
 
+    /**
+     * Returns neighbor list of a given vertex.
+     */
     private List<Vertex> getNeighbors(Vertex node) {
         List<Vertex> neighbors = new ArrayList<Vertex>();
         for (Edge edge : edges) {
@@ -92,7 +106,7 @@ public class DijkstraAlgorithm {
         return settledNodes.contains(vertex);
     }
 
-    private int getShortestDistance(Vertex destination) {
+    public int getShortestDistance(Vertex destination) {
         Integer d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;
