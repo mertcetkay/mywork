@@ -42,10 +42,6 @@ public class DijkstraAlgorithm {
         }
     }
 
-    /**
-     *
-     * @param node
-     */
     private void findMinimalDistances(Vertex node) {
         List<Vertex> adjacentNodes = getNeighbors(node);
         for (Vertex target : adjacentNodes) {

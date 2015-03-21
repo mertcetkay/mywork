@@ -25,10 +25,17 @@ public class Graph {
         this.edges = edges;
     }
 
+    public void addVertex(Vertex vertex){
+        vertexes.add(vertex);
+    }
+
+    public void addEdge(Edge edge){
+        edges.add(edge);
+    }
+
     /**
      * Accessor methods.
      */
-
     public List<Vertex> getVertexes() {
         return vertexes;
     }

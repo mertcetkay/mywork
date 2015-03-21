@@ -8,7 +8,10 @@ import tr.com.taughtworks.hw.model.Graph;
 import tr.com.taughtworks.hw.model.Vertex;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Mert on 20.3.2015.
@@ -89,7 +92,10 @@ public class TestProblems {
      */
     @Test
     public void testCaseOne(){
-
+        Vertex A = new Vertex("A","A");
+        Vertex B = new Vertex("B","B");
+        Vertex C = new Vertex("C","C");
+        assertEquals(9,dijkstra.getDistance(A,B) + dijkstra.getDistance(B,C));
     }
 
     /**
@@ -97,7 +103,9 @@ public class TestProblems {
      */
     @Test
     public void testCaseTwo(){
-
+        Vertex A = new Vertex("A","A");
+        Vertex D = new Vertex("D","D");
+        assertEquals(5,dijkstra.getDistance(A,D));
     }
 
     /**
@@ -105,7 +113,10 @@ public class TestProblems {
      */
     @Test
     public void testCaseThree(){
-
+        Vertex A = new Vertex("A","A");
+        Vertex D = new Vertex("D","D");
+        Vertex C = new Vertex("C","C");
+        assertEquals(13,dijkstra.getDistance(A,D) + dijkstra.getDistance(D,C));
     }
 
     /**
@@ -113,6 +124,19 @@ public class TestProblems {
      */
     @Test
     public void testCaseFour(){
+        Vertex A = new Vertex("A","A");
+        Vertex B = new Vertex("B","B");
+        Vertex C = new Vertex("C","C");
+        Vertex D = new Vertex("D","D");
+        Vertex E = new Vertex("E","E");
+
+        int totalCost = 0;
+        totalCost += dijkstra.getDistance(A,E);
+        totalCost += dijkstra.getDistance(E,B);
+        totalCost += dijkstra.getDistance(B,C);
+        totalCost += dijkstra.getDistance(C,D);
+
+        assertEquals(22,totalCost);
 
     }
 
@@ -121,7 +145,11 @@ public class TestProblems {
      */
     @Test
     public void testCaseFive(){
-
+        Vertex A = new Vertex("A","A");
+        Vertex E = new Vertex("E","E");
+        Vertex D = new Vertex("D","D");
+        assertEquals(7,dijkstra.getDistance(A,E));
+        assertEquals(-1,dijkstra.getDistance(E,D));
     }
 
     /**
@@ -145,7 +173,11 @@ public class TestProblems {
      */
     @Test
     public void testCaseEight(){
-
+        Vertex C = new Vertex("C","C");
+        LinkedList<Vertex> path = dijkstra.getPath(C);
+        for (Vertex vertex : path) {
+            System.out.println(vertex);
+        }
     }
 
     /**
@@ -154,6 +186,14 @@ public class TestProblems {
     @Test
     public void testCaseNine(){
 
+        Vertex A = new Vertex("A","A");
+        Vertex B = new Vertex("B","B");
+        dijkstra.execute(B);
+        LinkedList<Vertex> path = dijkstra.getPath(B);
+        for (Vertex vertex : path) {
+            System.out.println(vertex);
+        }
+        dijkstra.execute(A);
     }
 
     /**
