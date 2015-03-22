@@ -1,5 +1,7 @@
 package tr.com.taughtworks.hw.algorithm;
 
+import tr.com.taughtworks.hw.model.Edge;
+import tr.com.taughtworks.hw.model.Graph;
 import tr.com.taughtworks.hw.model.Vertex;
 
 import java.util.List;
@@ -9,11 +11,13 @@ import java.util.List;
  */
 public class GraphTraverseAlgorithms {
 
+    private final Graph graph;
     /**
      * Constructor
      */
-    public GraphTraverseAlgorithms(){
+    public GraphTraverseAlgorithms(Graph graph){
 
+        this.graph = graph;
     }
 
     /**
@@ -30,10 +34,23 @@ public class GraphTraverseAlgorithms {
 
     /**
      * Calculates number of routes from start to end
-     * including maxStops vertice at most.
+     * including maxStops number of depth at most.
+     * #6 #7
      */
     public int getNunberOfTrips(Vertex start, Vertex end, int maxStops){
 
         return 0;
     }
+
+    /**
+     * Calculates number of different routes from start to end
+     * with a given distance at most.
+     * #10
+     */
+    public int getNumberOfDifferentRoutes(Vertex start, Vertex end, int maxDistance){
+
+        return 0;
+    }
+
+
 }

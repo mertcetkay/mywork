@@ -3,13 +3,12 @@ package tr.com.taughtworks.hw;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import tr.com.taughtworks.hw.algorithm.DijkstraAlgorithm;
+import tr.com.taughtworks.hw.algorithm.DirectedGraphDFS;
 import tr.com.taughtworks.hw.model.Edge;
 import tr.com.taughtworks.hw.model.Graph;
 import tr.com.taughtworks.hw.model.Vertex;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,6 +26,11 @@ public class TestProblems {
      * Dijkstra algorithm to traverse the graph
      */
     public static DijkstraAlgorithm dijkstra;
+
+    /**
+     * todo
+     */
+    public static DirectedGraphDFS directedGraphDFS;
 
     /**
      * Initializes sample graph before tests to run.
@@ -83,6 +87,7 @@ public class TestProblems {
          * Init graph.
          */
         graph = new Graph(vertexList,edgeList);
+        directedGraphDFS = new DirectedGraphDFS();
         dijkstra = new DijkstraAlgorithm(graph);
         dijkstra.execute(vertexList.get(0));
     }
@@ -202,6 +207,27 @@ public class TestProblems {
     @Test
     public void testCaseTen(){
 
+    }
+
+    @Test
+    public void testDepthFirstSearch(){
+        Vertex a = new Vertex("A","A");
+        Set<Vertex> known = new HashSet<Vertex>();
+        Map<Vertex,Edge> forest = new HashMap<Vertex, Edge>();
+        directedGraphDFS.dfs(graph, a, known,forest);
+    }
+
+    @Test
+    public void testDepthFirstSearch2(){
+        Vertex c = new Vertex("C","C");
+        directedGraphDFS.compute6(graph, c, null, new LinkedHashSet<Vertex>(), 3);
+    }
+
+    @Test
+    public void testDepthFirstSearch3(){
+        Vertex a = new Vertex("A","A");
+        Vertex c = new Vertex("C","C");
+        directedGraphDFS.compute7(graph, a, c, null, new LinkedHashSet<Vertex>(),4);
     }
 
 }

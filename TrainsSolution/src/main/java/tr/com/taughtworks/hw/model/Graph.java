@@ -1,5 +1,6 @@
 package tr.com.taughtworks.hw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +32,46 @@ public class Graph {
 
     public void addEdge(Edge edge){
         edges.add(edge);
+    }
+
+    /**
+     * Returns adjacent vertices of a given vertex.
+     */
+    public List<Vertex> getAdjacentVertices(Vertex vertex){
+        List<Vertex> result = new ArrayList<Vertex>();
+        for(Edge edge : edges){
+            if( edge.getSource().equals(vertex)){
+                result.add(edge.getDestination());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns outgoing edge list of a given vertex.
+     */
+    public List<Edge> getOutgoingEdges( Vertex vertex){
+        List<Edge> outgoingEdgeList = new ArrayList<Edge>();
+
+        for( Edge edge : edges){
+            if( edge.getSource().equals(vertex)){
+                outgoingEdgeList.add(edge);
+            }
+        }
+        return outgoingEdgeList;
+    }
+
+    public List<Vertex> getOutNeighbors(Vertex v)
+    {
+        List<Vertex> result = new ArrayList<Vertex>();
+        for (Edge e : edges)
+        {
+            if (e.getSource().equals(v))
+            {
+                result.add(e.getDestination());
+            }
+        }
+        return result;
     }
 
     /**
