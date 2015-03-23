@@ -1,6 +1,5 @@
 package tr.com.taughtworks.hw.algorithm;
 
-import tr.com.taughtworks.hw.model.Edge;
 import tr.com.taughtworks.hw.model.Graph;
 import tr.com.taughtworks.hw.model.Vertex;
 
@@ -46,10 +45,20 @@ public class CustomGraphAlgorithms {
         return totalDistance;
     }
 
+
     /**
-     * Problem #6
+     * numberOfTripsWithMaxStopAlgorithm wrapper.
      */
-    public void compute6(Graph g, Vertex startVertex,
+    public int getNumberOfTripsWithMaxStop(Graph graph, Vertex startVertex, int maxStop){
+        paths.clear();
+        numberOfTripsWithMaxStopAlgorithm(graph, startVertex, null, new LinkedList<Vertex>(), maxStop);
+        return paths.size();
+    }
+
+    /**
+     * Calculates number of trips between same vertex within given depth.
+     */
+    private void numberOfTripsWithMaxStopAlgorithm(Graph g, Vertex startVertex,
                          Vertex currentVertex, LinkedList<Vertex> currentPath, int depth) {
 
         /**
@@ -59,30 +68,37 @@ public class CustomGraphAlgorithms {
             List<Vertex> path = new ArrayList<Vertex>();
             path.add(startVertex);
             path.addAll(currentPath);
-            System.out.println("Result " + path);
+            //System.out.println("Result " + path);
             paths.add(path);
         }
         if (currentVertex == null) {
             currentVertex = startVertex;
         }
         List<Vertex> neighbors = g.getAdjacentVertices(currentVertex);
-
         for (Vertex neighbor : neighbors) {
             currentPath.add(neighbor);
             depth--;
             if (depth >= 0) {
-                compute6(g, startVertex, neighbor, currentPath, depth);
+                numberOfTripsWithMaxStopAlgorithm(g, startVertex, neighbor, currentPath, depth);
             }
             currentPath.removeLastOccurrence(neighbor);
             depth++;
         }
     }
 
+    /**
+     * numberOfTripsWithExactStop wrapper.
+     */
+    public int getNumberOfTripsWithExactStop(Graph graph, Vertex startVertex, Vertex endVertex, int stopNumber){
+        paths.clear();
+        numberOfTripsWithExactStop(graph, startVertex, endVertex, null, new LinkedList<Vertex>(),stopNumber);
+        return paths.size();
+    }
 
     /**
-     * Problem #7
+     * Calculates number of trips between two vertices exactly at given depth.
      */
-    public void compute7(Graph g, Vertex startVertex, Vertex endVertex,
+    public void numberOfTripsWithExactStop(Graph g, Vertex startVertex, Vertex endVertex,
                          Vertex currentVertex, LinkedList<Vertex> currentPath, int depth) {
         /**
          * desired condition -> take snapshot ( save path )
@@ -91,7 +107,7 @@ public class CustomGraphAlgorithms {
             List<Vertex> path = new ArrayList<Vertex>();
             path.add(startVertex);
             path.addAll(currentPath);
-            System.out.println("Result " + path);
+            //System.out.println("Result " + path);
             paths.add(path);
         }
         if (currentVertex == null) {
@@ -102,7 +118,7 @@ public class CustomGraphAlgorithms {
             currentPath.add(neighbor);
             depth--;
             if (depth >= -1) {
-                compute7(g, startVertex, endVertex, neighbor, currentPath, depth);
+                numberOfTripsWithExactStop(g, startVertex, endVertex, neighbor, currentPath, depth);
             }
             currentPath.removeLastOccurrence(neighbor);
             depth++;
@@ -110,9 +126,19 @@ public class CustomGraphAlgorithms {
     }
 
     /**
-     * Problem #10
+     * numberOfRoutesWithMaxCost wrapper.
      */
-    public void compute10(Graph g, Vertex startVertex, Vertex endVertex,
+    public int getNumberOfRoutesWithMaxCost(Graph graph, Vertex startVertex, Vertex endVertex, int maxCost){
+        paths.clear();
+        numberOfRoutesWithMaxCost(graph,startVertex,endVertex,null,new LinkedList<Vertex>(),0,0,maxCost);
+        return paths.size();
+    }
+
+    /**
+     * Calculates different routes from start to ebd with a distance of less than maxCost
+     * #10
+     */
+    private void numberOfRoutesWithMaxCost(Graph g, Vertex startVertex, Vertex endVertex,
                           Vertex currentVertex, LinkedList<Vertex> currentPath, int depth, int currentCost, int maxCost) {
         /**
          * desired condition -> take snapshot ( save path )
@@ -121,7 +147,7 @@ public class CustomGraphAlgorithms {
             List<Vertex> path = new LinkedList<Vertex>();
             path.add(startVertex);
             path.addAll(currentPath);
-            System.out.println("Result " + path);
+            //System.out.println("Result " + path);
             paths.add(path);
         }
         if (currentVertex == null) {
@@ -132,8 +158,9 @@ public class CustomGraphAlgorithms {
             currentCost += g.getEdgeWeightBetweenTwoVertices(currentVertex, neighbor);
             currentPath.add(neighbor);
             depth++;
+            // maxCost is the worst case (maximum) depth if all edges' weights are 1
             if (depth <= maxCost) {
-                compute10(g, startVertex, endVertex, neighbor, currentPath, depth, currentCost, maxCost);
+                numberOfRoutesWithMaxCost(g, startVertex, endVertex, neighbor, currentPath, depth, currentCost, maxCost);
             }
             depth--;
             currentCost -= g.getEdgeWeightBetweenTwoVertices(currentVertex, neighbor);

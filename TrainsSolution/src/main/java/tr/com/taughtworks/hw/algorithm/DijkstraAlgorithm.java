@@ -122,5 +122,29 @@ public class DijkstraAlgorithm {
         return path;
     }
 
+    /**
+     * Extends dijkstra algorithm to start at
+     */
+    public int getShortestPathDistanceSameVertexExtension(Vertex vertex){
+        Vertex predecessor = null;
+        int minDistance = Integer.MAX_VALUE;
+        //calculate closest predecessor vertex
+        for(Edge e : edges){
+            if(e.getDestination().equals(vertex)){
+                if(e.getWeight()<minDistance){
+                    minDistance = e.getWeight();
+                    predecessor = e.getSource();
+                }
+            }
+        }
+        if( predecessor != null){
+            execute(vertex);
+            int distance = getShortestDistance(predecessor);
+            return distance + minDistance;
+        } else {
+            return -1;
+        }
+    }
+
 }
 

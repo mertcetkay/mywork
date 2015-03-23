@@ -1,7 +1,9 @@
 package tr.com.taughtworks.hw;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import tr.com.taughtworks.hw.algorithm.DijkstraAlgorithm;
 import tr.com.taughtworks.hw.algorithm.CustomGraphAlgorithms;
 import tr.com.taughtworks.hw.model.Edge;
@@ -16,6 +18,9 @@ import static org.junit.Assert.assertEquals;
  * Created by Mert on 20.3.2015.
  */
 public class TestGraphAlgorithms {
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     /**
      * The graph that tests run.
@@ -94,6 +99,7 @@ public class TestGraphAlgorithms {
 
     /**
      * Tests the distance of the route A-B-C
+     * #1
      */
     @Test
     public void testDistance_ABC() throws Exception {
@@ -106,6 +112,7 @@ public class TestGraphAlgorithms {
 
     /**
      * Tests the distance of the route A-D.
+     * #2
      */
     @Test
     public void testDistance_AD() throws Exception {
@@ -117,9 +124,10 @@ public class TestGraphAlgorithms {
 
     /**
      * Tests the distance of the route A-D-C.
+     * #3
      */
     @Test
-    public void testCaseThree() throws Exception {
+    public void testDistance_ADC() throws Exception {
         LinkedList<Vertex> route = new LinkedList();
         route.add(new Vertex("A","A"));
         route.add(new Vertex("D","D"));
@@ -129,9 +137,10 @@ public class TestGraphAlgorithms {
 
     /**
      * Tests the distance of the route A-E-B-C-D.
+     * #4
      */
     @Test
-    public void testCaseFour() throws Exception {
+    public void testDistance_AEBCD() throws Exception {
         LinkedList<Vertex> route = new LinkedList();
         route.add(new Vertex("A","A"));
         route.add(new Vertex("E","E"));
@@ -143,106 +152,69 @@ public class TestGraphAlgorithms {
 
     /**
      * Tests the distance of the route A-E-D.
+     * #5
      */
-    @Test(expected = Exception.class)
-    public void testCaseFive(){
+    @Test
+    public void testDistance_AED() throws Exception {
         LinkedList<Vertex> route = new LinkedList();
         route.add(new Vertex("A","A"));
         route.add(new Vertex("E","E"));
         route.add(new Vertex("D","D"));
-        try {
-            assertEquals(11,customGraphAlgorithms.getDistanceOfPath(route,graph));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        exception.expect(Exception.class);
+        assertEquals(-5,customGraphAlgorithms.getDistanceOfPath(route,graph));
     }
 
     /**
      * Tests the number of trips starting at C and ending at C with a maximum of 3 stops.
+     * #6
      */
     @Test
-    public void testCaseSix(){
-
+    public void testNumberOfStops_CC3(){
+        Vertex c = new Vertex("C","C");
+        assertEquals(2,customGraphAlgorithms.getNumberOfTripsWithMaxStop(graph, c, 3));
     }
 
     /**
      * Tests the number of trips starting at A and ending at C with exactly 4 stops.
+     * #7
      */
     @Test
-    public void testCaseSeven(){
-
+    public void testNumberOfStops_AC4(){
+        Vertex a = new Vertex("A","A");
+        Vertex c = new Vertex("C","C");
+        assertEquals(3,customGraphAlgorithms.getNumberOfTripsWithExactStop(graph, a, c, 4));
     }
 
     /**
-     * Tests the length of the shortest route from A to C.
+     * Tests the length of the shortest path from A to C.
+     * #8
      */
     @Test
-    public void testCaseEight(){
-        Vertex C = new Vertex("C","C");
-        LinkedList<Vertex> path = dijkstra.getPath(C);
-        for (Vertex vertex : path) {
-            System.out.println(vertex);
-        }
+    public void testShortestPath_AC(){
+        Vertex a = new Vertex("A","A");
+        Vertex c = new Vertex("C","C");
+        dijkstra.execute(a);
+        assertEquals(9,dijkstra.getShortestDistance(c));
     }
 
     /**
      * Tests the length of the shortest route from B to B.
+     * #9
      */
     @Test
-    public void testCaseNine(){
-
-        Vertex A = new Vertex("A","A");
-        Vertex B = new Vertex("B","B");
-        Vertex C = new Vertex("C","C");
-        //dijkstra.execute(A);
-        LinkedList<Vertex> path = dijkstra.getPath(B);
-        for (Vertex vertex : path) {
-            System.out.println(vertex);
-        }
-        dijkstra.execute(A);
-        System.out.println(dijkstra.getShortestDistance(C));
+    public void testShortestPath_BB(){
+        Vertex b = new Vertex("B","B");
+        assertEquals(9,dijkstra.getShortestPathDistanceSameVertexExtension(b));
     }
 
     /**
      * Tests the number of different routes from C to C with a distance of less than 30.
-     */
-    @Test
-    public void testCaseTen(){
-
-    }
-
-    /**
-     * #6
-     */
-    @Test
-    public void testDepthFirstSearch2(){
-        Vertex c = new Vertex("C","C");
-        customGraphAlgorithms.compute6(graph, c, null, new LinkedList<Vertex>(), 3);
-    }
-
-    /**
-     * #7
-     * B,C,D
-     * D,C,D
-     * D,E,B
-     */
-    @Test
-    public void testDepthFirstSearch3(){
-        Vertex a = new Vertex("A","A");
-        Vertex c = new Vertex("C","C");
-        customGraphAlgorithms.compute7(graph, a, c, null, new LinkedList<Vertex>(),4);
-    }
-
-    /**
      * #10
-     * B,C,D
-     * D,C,D
-     * D,E,B
      */
     @Test
-    public void testDepthFirstSearch10(){
+    public void testNumberOfRoutesWithinDistance_30(){
         Vertex c = new Vertex("C","C");
-        customGraphAlgorithms.compute10(graph, c, c, null, new LinkedList<Vertex>(),0,0,30);
+        assertEquals(7,customGraphAlgorithms.getNumberOfRoutesWithMaxCost(graph, c, c, 30));
     }
 
 }
