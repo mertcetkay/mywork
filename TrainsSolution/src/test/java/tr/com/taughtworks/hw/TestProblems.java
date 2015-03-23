@@ -193,12 +193,14 @@ public class TestProblems {
 
         Vertex A = new Vertex("A","A");
         Vertex B = new Vertex("B","B");
-        dijkstra.execute(B);
+        Vertex C = new Vertex("C","C");
+        dijkstra.execute(A);
         LinkedList<Vertex> path = dijkstra.getPath(B);
         for (Vertex vertex : path) {
             System.out.println(vertex);
         }
         dijkstra.execute(A);
+        System.out.println(dijkstra.getDistance(A,C));
     }
 
     /**
@@ -217,17 +219,38 @@ public class TestProblems {
         directedGraphDFS.dfs(graph, a, known,forest);
     }
 
+    /**
+     * #6
+     */
     @Test
     public void testDepthFirstSearch2(){
         Vertex c = new Vertex("C","C");
-        directedGraphDFS.compute6(graph, c, null, new LinkedHashSet<Vertex>(), 3);
+        directedGraphDFS.compute6(graph, c, null, new LinkedList<Vertex>(), 3);
     }
 
+    /**
+     * #7
+     * B,C,D
+     * D,C,D
+     * D,E,B
+     */
     @Test
     public void testDepthFirstSearch3(){
         Vertex a = new Vertex("A","A");
         Vertex c = new Vertex("C","C");
-        directedGraphDFS.compute7(graph, a, c, null, new LinkedHashSet<Vertex>(),4);
+        directedGraphDFS.compute7(graph, a, c, null, new LinkedList<Vertex>(),4);
+    }
+
+    /**
+     * #10
+     * B,C,D
+     * D,C,D
+     * D,E,B
+     */
+    @Test
+    public void testDepthFirstSearch10(){
+        Vertex c = new Vertex("C","C");
+        directedGraphDFS.compute10(graph, c, c, null, new LinkedList<Vertex>(),0,0,30);
     }
 
 }

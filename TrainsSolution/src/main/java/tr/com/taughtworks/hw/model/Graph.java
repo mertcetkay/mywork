@@ -61,6 +61,15 @@ public class Graph {
         return outgoingEdgeList;
     }
 
+    public int getEdgeWeightBetweenTwoVertices(Vertex source, Vertex destination){
+        for(Edge e : edges){
+            if(e.getSource().equals(source) && e.getDestination().equals(destination)){
+                return e.getWeight();
+            }
+        }
+        return -1;
+    }
+
     public List<Vertex> getOutNeighbors(Vertex v)
     {
         List<Vertex> result = new ArrayList<Vertex>();
