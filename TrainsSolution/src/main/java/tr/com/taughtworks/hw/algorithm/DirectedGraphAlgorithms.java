@@ -9,27 +9,14 @@ import java.util.*;
 /**
  * Created by Mert on 22.3.2015.
  */
-public class DirectedGraphDFS {
+public class DirectedGraphAlgorithms {
 
    private List<List> paths = new LinkedList<List>();
 
-   public DirectedGraphDFS(){
+   public DirectedGraphAlgorithms(){
 
    }
 
-    public void dfs(Graph graph, Vertex start, Set<Vertex> known, Map<Vertex,Edge> forest){
-
-        known.add(start);
-        for( Edge e : graph.getOutgoingEdges(start)){
-            Vertex currentAdjacentVertex = e.getDestination();
-            if(!known.contains(currentAdjacentVertex)){
-                forest.put(currentAdjacentVertex,e);
-                dfs(graph,currentAdjacentVertex,known,forest);
-            }
-        }
-        known.remove(start);
-        System.out.println(start.getName());
-    }
 
     /**
      *  Problem #6
@@ -137,5 +124,9 @@ public class DirectedGraphDFS {
             currentPath.removeLastOccurrence(neighbor);
 
         }
+    }
+
+    public List<List> getPaths() {
+        return paths;
     }
 }
