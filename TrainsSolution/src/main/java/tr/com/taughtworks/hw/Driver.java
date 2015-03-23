@@ -31,7 +31,7 @@ public class Driver {
         try {
             System.out.println("Output #1: " + customGraphAlgorithms.getDistanceOfPath(route_ABC, graph));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Output #1: " + e.getMessage());
         }
 
         /**
@@ -43,7 +43,7 @@ public class Driver {
         try {
             System.out.println("Output #2: " + customGraphAlgorithms.getDistanceOfPath(route_AD, graph));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Output #2: " + e.getMessage());
         }
 
         /**
@@ -56,7 +56,7 @@ public class Driver {
         try {
             System.out.println("Output #3: " + customGraphAlgorithms.getDistanceOfPath(route_ADC,graph));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Output #3: " + e.getMessage());
         }
 
         /**
@@ -71,7 +71,7 @@ public class Driver {
         try {
             System.out.println("Output #4: " + customGraphAlgorithms.getDistanceOfPath(route_AEBCD,graph));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Output #4: " + e.getMessage());
         }
 
         /**
@@ -114,7 +114,7 @@ public class Driver {
         /**
          * Output #10
          */
-        System.out.println("Output #9: " + customGraphAlgorithms.getNumberOfRoutesWithMaxCost(graph, c, c, 30));
+        System.out.println("Output #10: " + customGraphAlgorithms.getNumberOfRoutesWithMaxCost(graph, c, c, 30));
     }
 
 }
