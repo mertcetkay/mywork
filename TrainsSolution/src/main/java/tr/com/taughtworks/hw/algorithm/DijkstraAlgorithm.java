@@ -21,7 +21,6 @@ public class DijkstraAlgorithm {
     private Map<Vertex, Integer> distance;
 
     public DijkstraAlgorithm(Graph graph) {
-        // copy of graph components in order to operate on
         this.nodes = new ArrayList<Vertex>(graph.getVertexes());
         this.edges = new ArrayList<Edge>(graph.getEdges());
     }
@@ -56,9 +55,6 @@ public class DijkstraAlgorithm {
 
     }
 
-    /**
-     * Returns cost between two vertices.
-     */
     public int getDistance(Vertex node, Vertex target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
@@ -70,9 +66,6 @@ public class DijkstraAlgorithm {
         return -1;
     }
 
-    /**
-     * Returns neighbor list of a given vertex.
-     */
     private List<Vertex> getNeighbors(Vertex node) {
         List<Vertex> neighbors = new ArrayList<Vertex>();
         for (Edge edge : edges) {
@@ -102,6 +95,7 @@ public class DijkstraAlgorithm {
         return settledNodes.contains(vertex);
     }
 
+
     public int getShortestDistance(Vertex destination) {
         Integer d = distance.get(destination);
         if (d == null) {
@@ -111,10 +105,6 @@ public class DijkstraAlgorithm {
         }
     }
 
-    /*
-     * This method returns the path from the source to the selected target and
-     * NULL if no path exists
-     */
     public LinkedList<Vertex> getPath(Vertex target) {
         LinkedList<Vertex> path = new LinkedList<Vertex>();
         Vertex step = target;

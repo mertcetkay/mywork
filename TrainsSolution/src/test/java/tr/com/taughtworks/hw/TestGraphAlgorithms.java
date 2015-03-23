@@ -3,7 +3,7 @@ package tr.com.taughtworks.hw;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import tr.com.taughtworks.hw.algorithm.DijkstraAlgorithm;
-import tr.com.taughtworks.hw.algorithm.DirectedGraphDFS;
+import tr.com.taughtworks.hw.algorithm.CustomGraphAlgorithms;
 import tr.com.taughtworks.hw.model.Edge;
 import tr.com.taughtworks.hw.model.Graph;
 import tr.com.taughtworks.hw.model.Vertex;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Mert on 20.3.2015.
  */
-public class TestProblems {
+public class TestGraphAlgorithms {
 
     /**
      * The graph that tests run.
@@ -23,14 +23,14 @@ public class TestProblems {
     public static Graph graph;
 
     /**
-     * Dijkstra algorithm to traverse the graph
+     * Dijkstra algorithm to traverse the graph.
      */
     public static DijkstraAlgorithm dijkstra;
 
     /**
-     * todo
+     * Custom graph algorithms specific to home assignment.
      */
-    public static DirectedGraphDFS directedGraphDFS;
+    public static CustomGraphAlgorithms customGraphAlgorithms;
 
     /**
      * Initializes sample graph before tests to run.
@@ -43,51 +43,51 @@ public class TestProblems {
         /**
          * Init vertices.
          */
-        Vertex A = new Vertex("A","A");
-        vertexList.add(A);
-        Vertex B = new Vertex("B","B");
-        vertexList.add(B);
-        Vertex C = new Vertex("C","C");
-        vertexList.add(C);
-        Vertex D = new Vertex("D","D");
-        vertexList.add(D);
-        Vertex E = new Vertex("E","E");
-        vertexList.add(E);
+        Vertex a = new Vertex("A","A");
+        vertexList.add(a);
+        Vertex b = new Vertex("B","B");
+        vertexList.add(b);
+        Vertex c = new Vertex("C","C");
+        vertexList.add(c);
+        Vertex d = new Vertex("D","D");
+        vertexList.add(d);
+        Vertex e = new Vertex("E","E");
+        vertexList.add(e);
         /**
          * Init edges.
          */
         // AB5
-        Edge ab5 = new Edge("AB5",A,B,5);
+        Edge ab5 = new Edge("AB5",a,b,5);
         edgeList.add(ab5);
         // BC4
-        Edge bc4 = new Edge("BC4",B,C,4);
+        Edge bc4 = new Edge("BC4",b,c,4);
         edgeList.add(bc4);
         // CD8
-        Edge cd8 = new Edge("CD8",C,D,8);
+        Edge cd8 = new Edge("CD8",c,d,8);
         edgeList.add(cd8);
         // DC8
-        Edge dc8 = new Edge("DC8",D,C,8);
+        Edge dc8 = new Edge("DC8",d,c,8);
         edgeList.add(dc8);
         // DE6
-        Edge de6 = new Edge("DE6",D,E,6);
+        Edge de6 = new Edge("DE6",d,e,6);
         edgeList.add(de6);
         // AD5
-        Edge ad5 = new Edge("AD5",A,D,5);
+        Edge ad5 = new Edge("AD5",a,d,5);
         edgeList.add(ad5);
         // CE2
-        Edge ce2 = new Edge("CE2",C,E,2);
+        Edge ce2 = new Edge("CE2",c,e,2);
         edgeList.add(ce2);
         // EB3
-        Edge eb3 = new Edge("EB2",E,B,3);
+        Edge eb3 = new Edge("EB2",e,b,3);
         edgeList.add(eb3);
         // AE7
-        Edge ae7 = new Edge("AE7",A,E,7);
+        Edge ae7 = new Edge("AE7",a,e,7);
         edgeList.add(ae7);
         /**
          * Init graph.
          */
         graph = new Graph(vertexList,edgeList);
-        directedGraphDFS = new DirectedGraphDFS();
+        customGraphAlgorithms = new CustomGraphAlgorithms();
         dijkstra = new DijkstraAlgorithm(graph);
         dijkstra.execute(vertexList.get(0));
     }
@@ -96,65 +96,65 @@ public class TestProblems {
      * Tests the distance of the route A-B-C
      */
     @Test
-    public void testCaseOne(){
-        Vertex A = new Vertex("A","A");
-        Vertex B = new Vertex("B","B");
-        Vertex C = new Vertex("C","C");
-        assertEquals(9,dijkstra.getDistance(A,B) + dijkstra.getDistance(B,C));
+    public void testDistance_ABC() throws Exception {
+        LinkedList<Vertex> route = new LinkedList();
+        route.add(new Vertex("A","A"));
+        route.add(new Vertex("B","B"));
+        route.add(new Vertex("C","C"));
+        assertEquals(9,customGraphAlgorithms.getDistanceOfPath(route,graph));
     }
 
     /**
      * Tests the distance of the route A-D.
      */
     @Test
-    public void testCaseTwo(){
-        Vertex A = new Vertex("A","A");
-        Vertex D = new Vertex("D","D");
-        assertEquals(5,dijkstra.getDistance(A,D));
+    public void testDistance_AD() throws Exception {
+        LinkedList<Vertex> route = new LinkedList();
+        route.add(new Vertex("A","A"));
+        route.add(new Vertex("D","D"));
+        assertEquals(5,customGraphAlgorithms.getDistanceOfPath(route,graph));
     }
 
     /**
      * Tests the distance of the route A-D-C.
      */
     @Test
-    public void testCaseThree(){
-        Vertex A = new Vertex("A","A");
-        Vertex D = new Vertex("D","D");
-        Vertex C = new Vertex("C","C");
-        assertEquals(13,dijkstra.getDistance(A,D) + dijkstra.getDistance(D,C));
+    public void testCaseThree() throws Exception {
+        LinkedList<Vertex> route = new LinkedList();
+        route.add(new Vertex("A","A"));
+        route.add(new Vertex("D","D"));
+        route.add(new Vertex("C","C"));
+        assertEquals(13,customGraphAlgorithms.getDistanceOfPath(route,graph));
     }
 
     /**
      * Tests the distance of the route A-E-B-C-D.
      */
     @Test
-    public void testCaseFour(){
-        Vertex A = new Vertex("A","A");
-        Vertex B = new Vertex("B","B");
-        Vertex C = new Vertex("C","C");
-        Vertex D = new Vertex("D","D");
-        Vertex E = new Vertex("E","E");
-
-        int totalCost = 0;
-        totalCost += dijkstra.getDistance(A,E);
-        totalCost += dijkstra.getDistance(E,B);
-        totalCost += dijkstra.getDistance(B,C);
-        totalCost += dijkstra.getDistance(C,D);
-
-        assertEquals(22,totalCost);
-
+    public void testCaseFour() throws Exception {
+        LinkedList<Vertex> route = new LinkedList();
+        route.add(new Vertex("A","A"));
+        route.add(new Vertex("E","E"));
+        route.add(new Vertex("B","B"));
+        route.add(new Vertex("C","C"));
+        route.add(new Vertex("D","D"));
+        assertEquals(22,customGraphAlgorithms.getDistanceOfPath(route,graph));
     }
 
     /**
      * Tests the distance of the route A-E-D.
      */
-    @Test
+    @Test(expected = Exception.class)
     public void testCaseFive(){
-        Vertex A = new Vertex("A","A");
-        Vertex E = new Vertex("E","E");
-        Vertex D = new Vertex("D","D");
-        assertEquals(7,dijkstra.getDistance(A,E));
-        assertEquals(-1,dijkstra.getDistance(E,D));
+        LinkedList<Vertex> route = new LinkedList();
+        route.add(new Vertex("A","A"));
+        route.add(new Vertex("E","E"));
+        route.add(new Vertex("D","D"));
+        try {
+            assertEquals(11,customGraphAlgorithms.getDistanceOfPath(route,graph));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -194,13 +194,13 @@ public class TestProblems {
         Vertex A = new Vertex("A","A");
         Vertex B = new Vertex("B","B");
         Vertex C = new Vertex("C","C");
-        dijkstra.execute(A);
+        //dijkstra.execute(A);
         LinkedList<Vertex> path = dijkstra.getPath(B);
         for (Vertex vertex : path) {
             System.out.println(vertex);
         }
         dijkstra.execute(A);
-        System.out.println(dijkstra.getDistance(A,C));
+        System.out.println(dijkstra.getShortestDistance(C));
     }
 
     /**
@@ -211,21 +211,13 @@ public class TestProblems {
 
     }
 
-    @Test
-    public void testDepthFirstSearch(){
-        Vertex a = new Vertex("A","A");
-        Set<Vertex> known = new HashSet<Vertex>();
-        Map<Vertex,Edge> forest = new HashMap<Vertex, Edge>();
-        directedGraphDFS.dfs(graph, a, known,forest);
-    }
-
     /**
      * #6
      */
     @Test
     public void testDepthFirstSearch2(){
         Vertex c = new Vertex("C","C");
-        directedGraphDFS.compute6(graph, c, null, new LinkedList<Vertex>(), 3);
+        customGraphAlgorithms.compute6(graph, c, null, new LinkedList<Vertex>(), 3);
     }
 
     /**
@@ -238,7 +230,7 @@ public class TestProblems {
     public void testDepthFirstSearch3(){
         Vertex a = new Vertex("A","A");
         Vertex c = new Vertex("C","C");
-        directedGraphDFS.compute7(graph, a, c, null, new LinkedList<Vertex>(),4);
+        customGraphAlgorithms.compute7(graph, a, c, null, new LinkedList<Vertex>(),4);
     }
 
     /**
@@ -250,7 +242,7 @@ public class TestProblems {
     @Test
     public void testDepthFirstSearch10(){
         Vertex c = new Vertex("C","C");
-        directedGraphDFS.compute10(graph, c, c, null, new LinkedList<Vertex>(),0,0,30);
+        customGraphAlgorithms.compute10(graph, c, c, null, new LinkedList<Vertex>(),0,0,30);
     }
 
 }

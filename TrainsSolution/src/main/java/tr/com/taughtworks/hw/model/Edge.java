@@ -3,7 +3,7 @@ package tr.com.taughtworks.hw.model;
 /**
  * Created by Mert on 18.3.2015.
  */
-public class Edge  {
+public class Edge {
     /**
      * Unique edge identifier.
      */
@@ -28,13 +28,14 @@ public class Edge  {
         this.weight = weight;
     }
 
-    /**
-     *  Accessor methods.
-     */
-
-    public String getId() {
-        return id;
+    @Override
+    public String toString() {
+        return source + "" + destination + weight;
     }
+
+    /**
+     * Accessor methods.
+     */
     public Vertex getDestination() {
         return destination;
     }
@@ -42,14 +43,8 @@ public class Edge  {
     public Vertex getSource() {
         return source;
     }
+
     public int getWeight() {
         return weight;
     }
-
-    @Override
-    public String toString() {
-        return source + " " + destination;
-    }
-
-
 }

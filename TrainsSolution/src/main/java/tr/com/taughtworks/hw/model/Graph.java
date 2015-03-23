@@ -26,14 +26,6 @@ public class Graph {
         this.edges = edges;
     }
 
-    public void addVertex(Vertex vertex){
-        vertexes.add(vertex);
-    }
-
-    public void addEdge(Edge edge){
-        edges.add(edge);
-    }
-
     /**
      * Returns adjacent vertices of a given vertex.
      */
@@ -52,7 +44,6 @@ public class Graph {
      */
     public List<Edge> getOutgoingEdges( Vertex vertex){
         List<Edge> outgoingEdgeList = new ArrayList<Edge>();
-
         for( Edge edge : edges){
             if( edge.getSource().equals(vertex)){
                 outgoingEdgeList.add(edge);
@@ -61,6 +52,9 @@ public class Graph {
         return outgoingEdgeList;
     }
 
+    /**
+     * Returns cost of travelling from source to destination.
+     */
     public int getEdgeWeightBetweenTwoVertices(Vertex source, Vertex destination){
         for(Edge e : edges){
             if(e.getSource().equals(source) && e.getDestination().equals(destination)){
@@ -68,19 +62,6 @@ public class Graph {
             }
         }
         return -1;
-    }
-
-    public List<Vertex> getOutNeighbors(Vertex v)
-    {
-        List<Vertex> result = new ArrayList<Vertex>();
-        for (Edge e : edges)
-        {
-            if (e.getSource().equals(v))
-            {
-                result.add(e.getDestination());
-            }
-        }
-        return result;
     }
 
     /**
