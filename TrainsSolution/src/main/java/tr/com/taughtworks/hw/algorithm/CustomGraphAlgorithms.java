@@ -96,6 +96,7 @@ public class CustomGraphAlgorithms {
         return paths.size();
     }
 
+
     /**
      * Calculates number of trips between two vertices exactly at given depth.
      */
